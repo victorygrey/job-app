@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('job_id')->constrained('jobs')->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->foreignId('job_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->enum('status',['applied','reviewed','accepted','rejected'])->default('applied');
             $table->timestamp('applied_at')->useCurrent();
             $table->unique(['user_id','job_id']);
